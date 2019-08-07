@@ -1,47 +1,48 @@
-'use strict';
+"use strict";
 
-const React = require('react');
+const React = require("react");
 const PropTypes = React.PropTypes;
 
-const ResumePropTypes = require('../../prop_types/resume');
+const ResumePropTypes = require("../../prop_types/resume");
 
 const Entry = React.createClass({
     propTypes: {
         entry: ResumePropTypes.languages
     },
 
-    getInitialState: function () {
+    getInitialState: function() {
         return {
             style: {
-                background: '#313131'
+                background: "#0069aa"
             }
         };
     },
 
-    handleMouseEnter: function () {
+    handleMouseEnter: function() {
         return this.setState({
             style: {
-                background: '#11ABB0'
+                background: "#ea8723"
             }
         });
     },
 
-    handleMouseLeave: function () {
+    handleMouseLeave: function() {
         return this.setState({
             style: {
-                background: '#313131'
+                background: "#313131"
             }
         });
     },
 
-    render: function () {
+    render: function() {
         return (
             <li>
                 <span
                     className={`bar-expand percentage${this.props.entry.level}`}
                     onMouseEnter={this.handleMouseEnter}
                     onMouseLeave={this.handleMouseLeave}
-                    style={this.state.style}/>
+                    style={this.state.style}
+                />
                 <em>{this.props.entry.name}</em>
             </li>
         );
@@ -55,22 +56,22 @@ const Skill = React.createClass({
         summary: PropTypes.arrayOf(PropTypes.string).isRequired
     },
 
-    render: function () {
-        const summary = this.props.summary.map(function (point, index) {
+    render: function() {
+        const summary = this.props.summary.map(function(point, index) {
             return (
-                <p key={index} className='skill-summary'>{point}</p>
+                <p key={index} className="skill-summary">
+                    {point}
+                </p>
             );
         });
         return (
-            <div className='row inside'>
+            <div className="row inside">
                 <h3>{this.props.title}</h3>
                 {summary}
-                <div className='bars'>
-                    <ul className='skills'>
-                        {this.props.content.map(function (entry, index) {
-                            return (
-                                <Entry key={index} entry={entry}/>
-                            );
+                <div className="bars">
+                    <ul className="skills">
+                        {this.props.content.map(function(entry, index) {
+                            return <Entry key={index} entry={entry} />;
                         })}
                     </ul>
                 </div>
@@ -87,23 +88,24 @@ const Skills = React.createClass({
         }).isRequired
     },
 
-    render: function () {
+    render: function() {
         return (
-            <section id='skill'>
-                <div className='row skill'>
-                    <div className='two columns header-col'>
+            <section id="skill">
+                <div className="row skill">
+                    <div className="two columns header-col">
                         <h1>
                             <span>Skills</span>
                         </h1>
                     </div>
-                    <div className='ten columns main-col'>
-                        {this.props.content.skills.map(function (skill, index) {
+                    <div className="ten columns main-col">
+                        {this.props.content.skills.map(function(skill, index) {
                             return (
                                 <Skill
                                     key={index}
                                     title={skill.title}
                                     content={skill.skillDetails}
-                                    summary={skill.description}/>
+                                    summary={skill.description}
+                                />
                             );
                         })}
                         {/*
